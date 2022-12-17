@@ -1,0 +1,33 @@
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+	n := []int{}
+	for i := 0; i < len(nums1); i++ {
+		f := findIndex(nums2, nums1[i])
+		if f == len(nums2)-1 {
+			n = append(n, -1)
+		} else {
+			k := nums2[f:]
+			b := false
+			j := 0
+			for j = 0; j < len(k); j++ {
+				if nums1[i] < k[j] {
+					b = true
+					break
+				}
+			}
+			if b {
+				n = append(n, k[j])
+			} else {
+				n = append(n, -1)
+			}
+		}
+	}
+	return n
+}
+func findIndex(num []int, n int) int {
+	for i := 0; i < len(num); i++ {
+		if num[i] == n {
+			return i
+		}
+	}
+	return -1
+}
